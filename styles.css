@@ -18,9 +18,10 @@ body {
     width: 100%;
     height: auto;
     padding: 16px 0px;
-    font-size: 48px;
+    font-size: 5vh;
     text-align: center;
     background-color: darkslategray;
+    border-bottom: 2px solid #ffde34;
 }
 
 #content {
@@ -42,4 +43,13 @@ button#play {
     background-color: darkslategray;
     border: 2px solid #ffde34;
     border-radius: 10%;
-} 
+}
+
+/* Toggled for choice buttons when game starts */
+.choice {
+    font-size: 36px;
+    padding: 24px;
+    background-color: darkslategray;
+    border: 2px solid #ffde34;
+    border-radius: 10%;
+}
