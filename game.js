@@ -106,7 +106,9 @@ function showRoundMessage() {
 }
 
 /**
- * Displays the results of each round on the scoreboard.
+ * Displays the results of the round on the scoreboard.
+ * @param {string} result 
+ * @param {string} message 
  */
 function displayResults(result, message) {
     switch(result) {
@@ -163,8 +165,10 @@ function playRound(playerChoice) {
 
 /**
  * Ends the game of RPS and displays the results.
+ * Displays a rematch button to play again.
  */
 function endGame() {
+    // decide result of the game
     isPlayingGame = false;
     let gameOutcome;
     if (currentPlayerScore > currentCpuScore)
@@ -173,14 +177,41 @@ function endGame() {
         gameOutcome = "You lost the game..."
     else
         gameOutcome = "The game ended in a draw.";
+    // display result of the game
     document.getElementById('round-message').textContent = gameOutcome;
+    // display a rematch button
+    showRematchButton();
+}
+
+/**
+ * Displays a rematch button when the game is over.
+ * Pressing the button resets the game.
+ */
+function showRematchButton() {
+    // create and style rematch button
+    rematchButton = document.createElement('button');
+    rematchButton.classList.toggle('play');
+    rematchButton.textContent = "REMATCH";
+    // reset game when pressed
+    rematchButton.addEventListener('click', () => {
+        rematchButton.remove();
+        isPlayingGame = true;
+        currentRound = 1;
+        currentPlayerScore = 0;
+        currentCpuScore = 0;
+        document.getElementById('round-counter').textContent = 'Round: 1';
+        document.getElementById('player-score').textContent = 'You: 0';
+        document.getElementById('cpu-score').textContent = 'CPU: 0';
+    });
+    // display rematch button
+    contentDiv.appendChild(rematchButton);
 }
 
 // listen for play button to be clicked
-document.querySelector('button#play').addEventListener('click', () => {
+document.querySelector('button.play').addEventListener('click', () => {
     // remove start page nodes
     document.getElementById('instructions').remove();
-    document.querySelector('button#play').remove();
+    document.querySelector('button.play').remove();
     // set up initial game
     showScoreboard();
     showCpuChoice();
